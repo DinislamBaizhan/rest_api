@@ -3,12 +3,13 @@ package com.example.rest_api.controller;
 import com.example.rest_api.entity.Book;
 import com.example.rest_api.repository.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping()
 public class BookController {
     private final BookService bookService;
     @Autowired
@@ -16,6 +17,7 @@ public class BookController {
         this.bookService = bookService;
     }
     @PostMapping("/books")
+    @ResponseStatus(HttpStatus.CREATED)
     public Book createBook(@RequestBody Book book) {
         return bookService.createBook(book);
     }

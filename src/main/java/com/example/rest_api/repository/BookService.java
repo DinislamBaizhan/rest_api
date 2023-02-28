@@ -23,15 +23,11 @@ public class BookService {
     }
 
     public Book updateBook(int id, Book bookDetails) {
-        Book book;
-        if (bookRepository.findById(id).isPresent()) {
-            book = bookRepository.findById(id).get();
+        Book book = bookRepository.findById(id).orElseThrow();
             book.setName(bookDetails.getName());
             book.setAuthor(bookDetails.getAuthor());
             book.setYearsOfPublishing(bookDetails.getYearsOfPublishing());
             return bookRepository.save(book);
-        }
-        else return null;
     }
 
     public void deleteBook(int id) {
